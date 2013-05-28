@@ -51,7 +51,8 @@ public class TabsSettingsActivity extends Activity {
         });
 		
 		buttonPersonalData.setOnClickListener(new View.OnClickListener()
-		{public void onClick(View v) {
+		{@SuppressWarnings("deprecation")
+		public void onClick(View v) {
 			
 			AlertDialog alertDialog = new AlertDialog.Builder(TabsSettingsActivity.this).create();
 			String userRecovered = pref.getString("key_userName", "error");
