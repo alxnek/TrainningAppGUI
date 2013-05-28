@@ -59,6 +59,27 @@ public class TabsSettingsActivity extends Activity {
 			}
 			});
 
+		buttonRemove.setOnClickListener(new View.OnClickListener()
+		{public void onClick(View v) {
+			
+			String userRecovered = pref.getString("key_userName", "Not exist");
+			Login login = new Login();
+			
+			db.open();
+			login = db.getLogin(userRecovered);
+			db.open();
+			db.deleteLogin(login);
+			Log.d("BUTTON_REMOVE", "user removed");
+			Log.d("BUTTON_REMOVE", login._user);
+
+			Intent intent = new Intent(TabsSettingsActivity.this , LoginActivity.class);
+      	  	startActivity(intent);
+            finish();
+            
+            editor.clear();
+            editor.commit(); // commit changes
+        		}
+        });
 		
 		//Display the data of the current user
 		buttonPersonalData.setOnClickListener(new View.OnClickListener()
