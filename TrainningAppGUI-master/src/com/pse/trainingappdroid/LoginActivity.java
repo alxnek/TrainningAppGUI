@@ -42,8 +42,7 @@ public class LoginActivity extends Activity{
 		final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
 		final Editor editor = pref.edit();
 		
-		
-	   buttonLoggin.setOnClickListener(new View.OnClickListener()
+		buttonLoggin.setOnClickListener(new View.OnClickListener()
 			{public void onClick(View v) {
 	        		
 	        		String userName = inputUser.getText().toString();
@@ -54,15 +53,16 @@ public class LoginActivity extends Activity{
 	        			result = compareUser(userName, password);
 						  
 						  if(result == true){
-							  //Storing string and commit changes
+							  //Store the user name and the password to use them through the application
 							  editor.putString("key_userName", userName); 
 							  editor.putString("key_password", password); 
 							  editor.commit(); 
+							  
 							  Intent intent = new Intent(LoginActivity.this , MainActivity.class);
 				        	  startActivity(intent);
 				              finish();
 						  }else{
-							  messageUser("Error usename or/and password");
+							  messageUser("Error: usename or password");
 							  Log.d("BUTTON_LOGIN", "error");
 						  }
 	        		}else{
@@ -111,8 +111,7 @@ public class LoginActivity extends Activity{
 			startManagingCursor(cur);
 			// cur.moveToFirst();
 
-			// Search in the table, if the id and the password exist or don't
-			// exist
+			// Search in the table, if the id and the password exist or don't exist
 			while (cur.moveToNext()) {
 				// Compare the content of EditText with the data from the
 				// database

@@ -13,45 +13,45 @@ public class Login
          
     }
     
-    // constructor
+    //constructor
     public Login(int idUser, String user, String password){
         this._idUser = idUser;
         this._user = user;
         this._password = password;
     }
      
-    // constructor
+    //constructor
     public Login(String user, String password){
         this._user = user;
         this._password = password;
     }
-    // getting IdUser
+    //getting IdUser
     public int getIdUser(){
         return this._idUser;
     }
      
-    // setting IdUser
+    //setting IdUser
     public void setIdUser(int idUser){
         this._idUser = idUser;
 	
     }
     
-    // getting user
+    //getting user
     public String getUser(){
         return this._user;
     }
      
-    // setting user
+    //setting user
     public void setUser(String user){
         this._user = user;
     }
      
-    // getting password
+    //getting password
     public String getPassword(){
         return this._password;
     }
      
-    // setting password
+    //setting password
     public void setPassword(String password){
         this._password = password;
     }

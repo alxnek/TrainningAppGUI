@@ -32,14 +32,13 @@ public class RegisterActivity extends Activity{
 		
 		final LoginDataSource db = new LoginDataSource(this);
 	
-		//Submit add new user
+		//Add new user
 		buttonOk.setOnClickListener(new View.OnClickListener()
 		{public void onClick(View v) {
            		
         		String userName = inputUser.getText().toString();
         		String password = inputPassword.getText().toString();
         		String confirmPassword = inputConfirmPassword.getText().toString();
-        		
         		
 							if (userName.isEmpty() == false && password.isEmpty() == false) {
 								if (password.equals(confirmPassword)) {
@@ -48,7 +47,7 @@ public class RegisterActivity extends Activity{
 									Log.d("BUTTON_OK_SIGNUP", "Account created");
 									messageUser("New user created");
 								}else{
-									messageUser("Please verify the password");
+									messageUser("Please verify the passwords");
 								}
 							}else{
 								messageUser("Please fill the fields");

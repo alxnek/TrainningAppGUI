@@ -28,6 +28,7 @@ public class TabsSettingsActivity extends Activity {
 		final LoginDataSource db = new LoginDataSource(this);
 		final Editor editor = pref.edit();
 		
+		//Remove the current user
 		buttonRemove.setOnClickListener(new View.OnClickListener()
 		{public void onClick(View v) {
 			
@@ -50,6 +51,7 @@ public class TabsSettingsActivity extends Activity {
         		}
         });
 		
+		//Display the data of the current user
 		buttonPersonalData.setOnClickListener(new View.OnClickListener()
 		{@SuppressWarnings("deprecation")
 		public void onClick(View v) {
@@ -58,28 +60,23 @@ public class TabsSettingsActivity extends Activity {
 			String userRecovered = pref.getString("key_userName", "error");
 			String passwordRecovered = pref.getString("key_password", "error");
 			
-			// Setting Dialog Title
+			//Setting Dialog Title
 			alertDialog.setTitle("Personal data");
 			
-			// Setting Dialog Message
+			//Setting Dialog Message
 			alertDialog.setMessage("User name: " + userRecovered + "\n" + "Password: " + passwordRecovered);
 			
-			// Setting Icon to Dialog
+			//Setting Icon to Dialog
 			alertDialog.setIcon(R.drawable.logo_login);
 			
-			// Setting OK Button
+			//Setting OK Button
 			alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
 			        public void onClick(DialogInterface dialog, int which) {
-
 			        }
 			});
 			
 			// Showing Alert Message
 			alertDialog.show();
-			
-			
-			
-			
         		}
         });
 

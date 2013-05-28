@@ -38,25 +38,19 @@ public class LoginDataSource
 	  // Inserting Row
 	  db.insert(MySQLiteHelper.TABLE_LOGIN, null, values);
 	  db.close();
-	  
       }
 	    
 	  //Getting single login
 	  Login getLogin(String user) {
-	
-	 
 	  Cursor cursor = database.query(MySQLiteHelper.TABLE_LOGIN, new String[] { MySQLiteHelper.COLUMN_IDUSER,
 			  MySQLiteHelper.COLUMN_USER, MySQLiteHelper.COLUMN_PASSWORD }, MySQLiteHelper.COLUMN_USER + "=?",
 	                new String[] { String.valueOf(user) }, null, null, null, null);
 	        if (cursor != null)
 	            cursor.moveToFirst();
-	 
-	        Login login = new Login(Integer.parseInt(cursor.getString(0)),
-	                cursor.getString(1), cursor.getString(2));
-	        // return login
+	        	Login login = new Login(Integer.parseInt(cursor.getString(0)),
+	            cursor.getString(1), cursor.getString(2));
 	        return login;
 	    }
-	  
 	  
 	   //Deleting single contact
 	  public void deleteLogin(Login login) {
@@ -64,12 +58,12 @@ public class LoginDataSource
 	    db.delete(MySQLiteHelper.TABLE_LOGIN, MySQLiteHelper.COLUMN_IDUSER + " = ?",
 	            new String[] { String.valueOf(login.getIdUser()) });
 	    db.close();
-	}
+	  }
 	  
-	//Data query recover
-	public Cursor fetchAllTodos(){
+	  //Data query recover
+	  public Cursor fetchAllTodos(){
 		return database.query(MySQLiteHelper.TABLE_LOGIN, new String[] 
 				{MySQLiteHelper.COLUMN_IDUSER, MySQLiteHelper.COLUMN_USER, MySQLiteHelper.COLUMN_PASSWORD}, null, null, null,null, null);
-		}
+	  }
 
 }
