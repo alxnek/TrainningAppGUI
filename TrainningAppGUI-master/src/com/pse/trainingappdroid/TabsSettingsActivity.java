@@ -9,47 +9,56 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class TabsSettingsActivity extends Activity {
 	
+	//sometimes the sensor gets higher default values ~50k++ and sometimes lower 46k aprox
+	private Button adaptBut;
+	private boolean option = true;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tab_settings);
 		
+		
+		
 		//Find buttons
 		Button buttonRemove = (Button)findViewById(R.id.buttonRemove);
 		Button buttonPersonalData = (Button)findViewById(R.id.buttonPersonal);
+		adaptBut = (Button) this.findViewById(R.id.buttonAdapt);
 		
 		final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
 		
 		final LoginDataSource db = new LoginDataSource(this);
 		final Editor editor = pref.edit();
 		
-		//Remove the current user
-		buttonRemove.setOnClickListener(new View.OnClickListener()
-		{public void onClick(View v) {
-			
-			String userRecovered = pref.getString("key_userName", "Not exist");
-			Login login = new Login();
-			
-			db.open();
-			login = db.getLogin(userRecovered);
-			db.open();
-			db.deleteLogin(login);
-			Log.d("BUTTON_REMOVE", "user removed");
-			Log.d("BUTTON_REMOVE", login._user);
+	
+		
+		adaptBut.setOnClickListener(new OnClickListener() {
 
-			Intent intent = new Intent(TabsSettingsActivity.this , LoginActivity.class);
-      	  	startActivity(intent);
-            finish();
-            
-            editor.clear();
-            editor.commit(); // commit changes
-        		}
-        });
+			@Override
+			public void onClick(View v)
+			{
+			if (option) {
+			WorkoutActivity.LOW_VALUE = 47800;
+			WorkoutActivity.MED_VALUE = 53800;
+			option = false;
+			Toast.makeText(TabsSettingsActivity.this, "Adapted to lower values", Toast.LENGTH_SHORT).show();
+			}
+			else {
+			WorkoutActivity.LOW_VALUE = 51500;
+			WorkoutActivity.MED_VALUE = 57500;
+			option = true;
+			Toast.makeText(TabsSettingsActivity.this, "Adapted to higher values", Toast.LENGTH_SHORT).show();
+			}
+
+			}
+			});
+
 		
 		//Display the data of the current user
 		buttonPersonalData.setOnClickListener(new View.OnClickListener()
